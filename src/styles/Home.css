@@ -1,0 +1,177 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: inherit;
+  }
+  
+  .menu {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
+  .menu-list {
+    list-style: none;
+    display: flex;
+    margin-right: 10px;
+    gap: 50px;
+    font-weight: bold;
+  }
+  
+  .menu-list li {
+    display: inline;
+  }
+  
+  .menu-list li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+  
+  .picture-container {
+    position: relative;
+    text-align: center;
+    height: 600px;
+  }
+  
+  .onion-design {
+    width: 100%;
+    height: auto;
+  }
+  
+  .overlay-text {
+    font-weight: lighter;
+    font-size: 30px;
+    position: absolute;
+    top: 40%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    color: rgb(0, 0, 0);
+    text-align: left;
+    line-height: 0.5;
+  }
+  
+  .start-button {
+    background-color: #D4A1C1;
+    color: rgb(0, 0, 0);
+    padding: 10px 100px;
+    border: 0.5px solid #000000;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 17px;
+  }
+  
+  .info-section h2 {
+    margin-top: 70px;
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  .info-container {
+    padding: 0.1px;
+    background-color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  .pests-cards { /* To center pest info */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    margin: 40px auto;
+    width: 100%
+  }
+  
+  .pest-card { 
+    width: 250px;
+    background-color: #D4A1C1;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .pest-card h3 { 
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #000000;
+  }
+  
+  .pest-card p {
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  .contact-us {
+    padding: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+/* Existing styles */
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 12px;
+  }
+  
+  .contact-icons a {
+    display: inline-block;
+  }
+  
+  /* Default icon color */
+  .contact-icon {
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  /* Individual icon colors */
+  .contact-icon.email {
+    color: rgb(0, 0, 0);
+  }
+  
+  .contact-icon.youtube {
+    color: rgb(0, 0, 0);
+  }
+  
+  .contact-icon.facebook {
+    color: rgb(0, 0, 0);
+  }
+  
+  .contact-icon.github {
+    color: rgb(0, 0, 0);
+  }
+  
+  /* Hover effect */
+  .contact-icon:hover {
+    color: #D4A1C1; /* Dark color on hover */
+    transform: scale(1.2); /* Slightly scale the icon */
+  }
+  
+  /* Optional: You can target all icons at once if needed */
+  svg.feather {
+    transition: color 0.3s ease;
+  }
+  
+  .footer {
+    margin-top: auto;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .footer-image {
+    width: 100%;
+    height: 100px;
+    display: block;
+  }
+  

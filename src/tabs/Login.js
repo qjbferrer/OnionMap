@@ -65,8 +65,7 @@ function Login() {
                 Don't have an account?
                 <span onClick={redirectToSignup} className="signup-link"> Sign Up</span>
               </p>
-  
-              <p className="forgot-password">Forgot Password?</p>
+
             </form>
           </div>
         </div>

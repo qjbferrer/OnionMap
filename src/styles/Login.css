@@ -148,14 +148,6 @@ input {
 
 }
 
-.forgot-password {
-  font-size: 12px;
-  color: #0066cc;
-  text-align: center;
-  margin-top: 1px;
-  font-weight: bold;
-}
-
 .info-section {
   flex: 1.4;
   background-color: #ffffff;
