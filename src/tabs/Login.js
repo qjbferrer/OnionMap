@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import logo from '../assets/logo.png';
-import onionlogin from '../assets/login-design.png';
+import design1 from '../assets/design1.png';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -61,7 +61,7 @@ function Login() {
 
         <div className="info-section">
           <div className="illustration">
-            <img src={onionlogin} alt="Onion Login Design" />
+            <img src={design1} alt="Onion Login Design" />
           </div>
         </div>
       </div>
