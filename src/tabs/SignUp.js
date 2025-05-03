@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Login.css';
+import '../styles/SignUp.css';
 import logo from '../assets/logo.png';
 import design1 from '../assets/design1.png';
 
-function Login() {
+function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const navigate = useNavigate();
 
-  const handleLoginSubmit = (event) => {
+  const handleSignupSubmit = (event) => {
     event.preventDefault();
 
-    const storedAccount = JSON.parse(localStorage.getItem('account'));
-
-    if (storedAccount && storedAccount.email === email && storedAccount.password === password) {
-      alert('Login successful!');
-      navigate('/home');
+    if (password === confirm) {
+      const account = { email, password };
+      localStorage.setItem('account', JSON.stringify(account)); 
+      alert('Your account has been created successfully!');
+      navigate('/'); 
     } else {
-      alert('No account found. Please create an account.');
+      alert('Password does not match. Please try again.');
     }
   };
 
-  const redirectToSignup = () => {
-    navigate('/signup');
+  const redirectToLogin = () => {
+    navigate('/');
   };
 
   return (
@@ -31,12 +32,12 @@ function Login() {
       <header className="header-bar">
         <img src={logo} className="header-logo" alt="logo" />
       </header>
-  
+
       <div className="content-container">
         <div className="login-section">
           <div className="login-form">
-            <form onSubmit={handleLoginSubmit}>
-              <label>User Login</label>
+            <form onSubmit={handleSignupSubmit}>
+              <label>Sign Up</label>
               <input 
                 type="email" 
                 placeholder="Email Address" 
@@ -49,28 +50,21 @@ function Login() {
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)} 
               />
-              <button type="submit" className="login-button">Login</button>
-
-              <div className="divider-with-or">
-                <hr className="line" />
-                <span className="or-text">or</span>
-                <hr className="line" />
-              </div>
-  
-              <div className="google-login-btn">
-                Login with Google
-              </div>
-  
-              <p className="signup-text">
-                Don't have an account?
-                <span onClick={redirectToSignup} className="signup-link"> Sign Up</span>
-              </p>
-  
-              <p className="forgot-password">Forgot Password?</p>
+              <input 
+                type="password" 
+                placeholder="Confirm password" 
+                value={confirm} 
+                onChange={(e) => setConfirm(e.target.value)} 
+              />
+              <button type="submit" className="login-button">Create an Account</button>
             </form>
+            <p className="login-text">
+              Already have an account? 
+              <span onClick={redirectToLogin} className="login-link"> Log In</span>
+            </p>
           </div>
         </div>
-  
+
         <div className="info-section">
           <div className="illustration">
             <img src={design1} alt="Onion Login Design" />
@@ -79,7 +73,6 @@ function Login() {
       </div>
     </div>
   );
-  
 }
 
-export default Login;
+export default SignUp;
