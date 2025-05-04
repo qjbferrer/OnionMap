@@ -48,22 +48,26 @@ function HomePage() {
           <div className="pest-card">
             <img src={Armyworm} alt="Armyworm" />
             <h3>ARMYWORM</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <p>Armyworms feed on leaves and seedlings, often causing significant damage by defoliating plants. 
+            They can quickly move across fields in large groups, making them a serious threat.</p>
           </div>
           <div className="pest-card">
             <img src={Cutworm} alt="Cutworm" />
             <h3>CUTWORM</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <p> Cutworms are nocturnal pests that hide in the soil during the day and feed on the stems of young onion plants at night. 
+              They cut the seedlings at the base, leading to plant collapse and significant crop loss if infestations are severe.</p>
           </div>
           <div className="pest-card">
             <img src={RedSpiderMites} alt="Red Spider Mites" />
             <h3>RED SPIDER MITES</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <p>Red spider mites are a major pest of onions, especially in hot, dry conditions. 
+            They infest the undersides of leaves and suck out plant juices, causing yellowing, leaf curling, and stunted growth.</p>
           </div>
           <div className="pest-card">
             <img src={Others} alt="Others" />
             <h3>OTHERS</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <p>Other onion pests include onion thrips, which feed on the leaves and cause silvering, and onion maggots, which attack the roots and bulbs. 
+              These pests can lead to reduced bulb size, poor plant health, and even total crop loss if not controlled effectively.</p>
           </div>
         </div>
 

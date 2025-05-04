@@ -21,7 +21,6 @@ function AboutPage() {
         <nav className={`menu ${menuOpen ? 'active' : ''}`}>
           <ul className="menu-list">
             <li><Link to="/home">HOME</Link></li>
-            <li><Link to="/about-us">ABOUT US</Link></li>
             <li><Link to="/">LOGOUT</Link></li>
           </ul>
         </nav>
@@ -33,31 +32,51 @@ function AboutPage() {
 
       <div className="info-container">
         <h2>TEAM 7</h2>
-        <div className="pests-cards">
-          <div className="pest-card">
+        <div className="t7-cards">
+          <div className="t7-card">
             <img src={JC} alt="JC" />
-            <h3>ARMYWORM</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <h3>John Carlo</h3>
+            <h4>Fernandez</h4>
+            <p>Email:</p>
+            <q>qjcpfernandez@tip.edu.ph</q>
+            <p>Elective:</p>
+            <q>Data Science</q>
           </div>
-          <div className="pest-card">
+          <div className="t7-card">
             <img src={Joseph} alt="Joseph" />
-            <h3>CUTWORM</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <h3>Joseph Bryan</h3>
+            <h4>Ferrer</h4>
+            <p>Email:</p>
+            <q>qjbferrer@tip.edu.ph</q>
+            <p>Elective:</p>
+            <q>System Administration</q>
           </div>
-          <div className="pest-card">
+          <div className="t7-card">
             <img src={Rachel} alt="Rachel" />
-            <h3>RED SPIDER MITES</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <h3>Rachel Joy</h3>
+            <h4>Pineda</h4>
+            <p>Email:</p>
+            <q>qrjdpineda@tip.edu.ph</q>
+            <p>Elective:</p>
+            <q>Intelligent Systems</q>
           </div>
-          <div className="pest-card">
+          <div className="t7-card">
             <img src={Vincent} alt="Vincent" />
-            <h3>OTHERS</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <h3>Vincent Gon</h3>
+            <h4>Serrano</h4>
+            <p>Email:</p>
+            <q>qvgbserrano@tip.edu.ph</q>
+            <p>Elective:</p>
+            <q>Intelligent Systems</q>
           </div>
-          <div className="pest-card">
+          <div className="t7-card">
             <img src={Thirdy} alt="Thirdy" />
-            <h3>OTHERS</h3>
-            <p>Armyworm is a bla bla bla bla bla bla bla bla bla bla bla bla</p>
+            <h3>Armando</h3>
+            <h4>Vinluan III</h4>
+            <p>Email:</p>
+            <q>qamvinluan@tip.edu.ph</q>
+            <p>Elective:</p>
+            <q>Data Science</q>
           </div>
         </div>
 

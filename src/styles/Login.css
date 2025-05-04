@@ -1,3 +1,39 @@
+/* Animations */
+@keyframes fadeInZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* App container */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -5,6 +41,7 @@
   font-family: Arial, sans-serif;
 }
 
+/* Header bar */
 .header-bar {
   display: flex;
   align-items: center;
@@ -21,11 +58,13 @@
   margin-right: 30px;
 }
 
+/* Content area */
 .content-container {
   display: flex;
   flex: 1;
 }
 
+/* Login section */
 .login-section {
   background-color: #ffffff;
   flex: 1;
@@ -35,6 +74,7 @@
   padding: 20px;
 }
 
+/* Login form */
 .login-form {
   background-color: #E8E8E8;
   padding: 30px;
@@ -43,20 +83,37 @@
   width: 100%;
   max-width: 350px;
   text-align: center;
+  animation: fadeInZoom 0.8s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
+.login-form:hover {
+  transform: scale(1.05);
+}
+
+/* Form layout */
 form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
+/* Input fields */
 input {
   padding: 10px;
   border: 1px solid #000000;
   border-radius: 100px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+input:focus {
+  border-color: #E00AB2;
+  box-shadow: 0 0 5px #E00AB2;
+  outline: none;
+}
+
+/* Login label */
 .login-form label {
   text-align: center;
   font-size: 30px;
@@ -64,8 +121,10 @@ input {
   font-weight: bold;
   margin-bottom: 10px;
   display: block;
+  animation: fadeSlideIn 0.6s ease;
 }
 
+/* Login button */
 .login-button {
   background-color: #E00AB2;
   color: white;
@@ -77,12 +136,16 @@ input {
   margin-bottom: 1px;
   font-size: 14px;
   font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  animation: pulseButton 2s infinite ease-in-out;
 }
 
 .login-button:hover {
   background-color: #b1058c;
+  transform: scale(1.05);
 }
 
+/* Divider with OR */
 .divider-with-or {
   display: flex;
   align-items: center;
@@ -104,6 +167,7 @@ input {
   white-space: nowrap;
 }
 
+/* Google login button */
 .google-login-btn {
   display: flex;
   align-items: center;
@@ -116,6 +180,7 @@ input {
   font-size: 14px;
   margin-bottom: 10px;
   font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .google-login-btn img {
@@ -125,8 +190,10 @@ input {
 
 .google-login-btn:hover {
   background-color: #706f6f;
+  transform: scale(1.03);
 }
 
+/* Signup text and link */
 .signup-text {
   font-size: 12px;
   color: #333;
@@ -141,13 +208,14 @@ input {
   cursor: pointer;
   font-size: 12px;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .signup-link:hover {
-  color: darkblue; 
-
+  color: darkblue;
 }
 
+/* Info section */
 .info-section {
   flex: 1.4;
   background-color: #ffffff;
