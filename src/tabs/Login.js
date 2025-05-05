@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from '../firebase.js'; // Import necessary Firebase functions
 import '../styles/Login.css';
 import logo from '../assets/logo.png';
 import design1 from '../assets/design1.png';
@@ -9,16 +10,30 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLoginSubmit = (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
 
-    const storedAccount = JSON.parse(localStorage.getItem('account'));
-
-    if (storedAccount && storedAccount.email === email && storedAccount.password === password) {
+    try {
+      // Sign in using Firebase Authentication
+      await signInWithEmailAndPassword(auth, email, password);
       alert('Login successful!');
       navigate('/home');
-    } else {
-      alert('No account found. Please create an account.');
+    } catch (error) {
+      alert('Error logging in: ' + error.message); // Display error message if login fails
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      // The signed-in user info
+      const user = result.user;
+      alert('Google login successful! Welcome ' + user.displayName);
+      navigate('/home');
+    } catch (error) {
+      alert('Error logging in with Google: ' + error.message); // Display error message if Google login fails
     }
   };
 
@@ -57,7 +72,7 @@ function Login() {
                 <hr className="line" />
               </div>
   
-              <div className="google-login-btn">
+              <div className="google-login-btn" onClick={handleGoogleLogin}>
                 Login with Google
               </div>
   
@@ -78,7 +93,6 @@ function Login() {
       </div>
     </div>
   );
-  
 }
 
 export default Login;

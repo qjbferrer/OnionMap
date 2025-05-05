@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth, createUserWithEmailAndPassword } from '../firebase.js'; // Import auth and createUser method
 import '../styles/SignUp.css';
 import logo from '../assets/logo.png';
 import design1 from '../assets/design1.png';
@@ -10,16 +11,20 @@ function SignUp() {
   const [confirm, setConfirm] = useState('');
   const navigate = useNavigate();
 
-  const handleSignupSubmit = (event) => {
+  const handleSignupSubmit = async (event) => {
     event.preventDefault();
 
     if (password === confirm) {
-      const account = { email, password };
-      localStorage.setItem('account', JSON.stringify(account)); 
-      alert('Your account has been created successfully!');
-      navigate('/'); 
+      try {
+        // Create user using Firebase Authentication
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert('Your account has been created successfully!');
+        navigate('/'); // Redirect to login page after successful account creation
+      } catch (error) {
+        alert('Error creating account: ' + error.message); // Show error if account creation fails
+      }
     } else {
-      alert('Password does not match. Please try again.');
+      alert('Passwords do not match. Please try again.');
     }
   };
 
@@ -67,7 +72,7 @@ function SignUp() {
 
         <div className="info-section">
           <div className="illustration">
-            <img src={design1} alt="Onion Login Design" />
+            <img src={design1} alt="Onion SignUp Design" />
           </div>
         </div>
       </div>
