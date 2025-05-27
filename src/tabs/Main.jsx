@@ -1,15 +1,68 @@
-import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // ← Add this
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../styles/Main.css';
 import logo from '../assets/logo.png';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicWpiZmVycmVyIiwiYSI6ImNtYTlqbDEyaTBrYnUya3BzeHd4ZWFnOXMifQ.PeNfgVuGD53Au8Vmkpe2RQ';
 
+const pestColors = {
+  'Armyworm': 'green',
+  'Cutworm': 'blue',
+  'Red Spider Mites': 'red',
+  'Others': 'violet',
+};
+
 const Main = () => {
   const mapContainerRef = useRef(null);
-  const navigate = useNavigate(); // ← React Router navigation hook
+  const navigate = useNavigate();
+  const mapRef = useRef(null);
+  const [selectedPests, setSelectedPests] = useState([]);
+  const markersRef = useRef([]);
+
+  const clearMarkers = () => {
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current = [];
+  };
+
+  const fetchPestReports = async (map, selectedPests) => {
+    try {
+      const snapshot = await getDocs(collection(db, 'pestScans'));
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const pest = data.result || 'Others';
+
+        // Skip marker if it's not selected
+        if (selectedPests.length > 0 && !selectedPests.includes(pest)) return;
+
+        if (data.latitude && data.longitude) {
+          const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+            <div class="pest-popup">
+              <h3 class="pest-popup-title">${pest}</h3>
+              <p class="pest-popup-field"><strong>Reported by:</strong><br>${data.farmerName || 'Anonymous'}</p>
+              <p class="pest-popup-field"><strong>Date Reported:</strong><br>${data.date ? `${data.date}, ${data.time}` : 'Unknown'}</p>
+              ${data.image ? `<img src="${data.image}" alt="Pest Image" class="pest-popup-image" />` : ''}
+            </div>
+          `);
+
+          const markerColor = pestColors[pest] || 'gray';
+
+          const marker = new mapboxgl.Marker({ color: markerColor })
+            .setLngLat([data.longitude, data.latitude])
+            .setPopup(popup)
+            .addTo(map);
+
+          markersRef.current.push(marker);
+        }
+      });
+    } catch (error) {
+      console.error('Failed to load pest reports:', error);
+    }
+  };
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -22,6 +75,7 @@ const Main = () => {
       antialias: true,
     });
 
+    mapRef.current = map;
     map.addControl(new mapboxgl.NavigationControl());
 
     map.on('load', () => {
@@ -43,25 +97,40 @@ const Main = () => {
           'sky-atmosphere-sun-intensity': 15,
         },
       });
+
+      fetchPestReports(map, []);
     });
 
     return () => map.remove();
   }, []);
 
-  const handleLogoClick = () => {
-    navigate('/home'); // ← Go back to home page
+  useEffect(() => {
+    if (mapRef.current && mapRef.current.isStyleLoaded()) {
+      clearMarkers();
+      fetchPestReports(mapRef.current, selectedPests);
+    }
+  }, [selectedPests]);
+
+  const handleCheckboxChange = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+
+    setSelectedPests((prev) =>
+      isChecked ? [...prev, value] : prev.filter((pest) => pest !== value)
+    );
   };
+
+  const handleLogoClick = () => navigate('/home');
 
   return (
     <div className="main-container">
-      {/* Sidebar */}
       <aside className="sidebar">
         <img
           src={logo}
           alt="Onion Pest Logo"
           className="logo"
           onClick={handleLogoClick}
-          style={{ cursor: 'pointer' }} // Indicates it's clickable
+          style={{ cursor: 'pointer' }}
         />
 
         <div className="card">
@@ -92,10 +161,22 @@ const Main = () => {
         <div className="card">
           <h4>Pest Categories</h4>
           <div className="checkbox-group">
-            <label><input type="checkbox" /> Armyworms</label>
-            <label><input type="checkbox" /> Cutworms</label>
-            <label><input type="checkbox" /> Red Spider Mites</label>
-            <label><input type="checkbox" /> Others</label>
+            <label>
+              <input type="checkbox" value="Armyworm" onChange={handleCheckboxChange} />
+              Armyworms
+            </label>
+            <label>
+              <input type="checkbox" value="Cutworm" onChange={handleCheckboxChange} />
+              Cutworms
+            </label>
+            <label>
+              <input type="checkbox" value="Red Spider Mites" onChange={handleCheckboxChange} />
+              Red Spider Mites
+            </label>
+            <label>
+              <input type="checkbox" value="Others" onChange={handleCheckboxChange} />
+              Others
+            </label>
           </div>
         </div>
 
@@ -105,7 +186,6 @@ const Main = () => {
         </div>
       </aside>
 
-      {/* Map */}
       <main className="map-area">
         <div ref={mapContainerRef} id="map" />
       </main>
